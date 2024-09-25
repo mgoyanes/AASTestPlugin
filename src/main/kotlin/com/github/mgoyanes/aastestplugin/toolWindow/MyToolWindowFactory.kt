@@ -1,5 +1,6 @@
 package com.github.mgoyanes.aastestplugin.toolWindow
 
+import RandomNumber
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
@@ -20,16 +21,23 @@ class MyToolWindowFactory : ToolWindowFactory {
     }
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val myToolWindow = MyToolWindow(toolWindow)
-        val content = ContentFactory.getInstance().createContent(myToolWindow.getContent(), null, false)
-        toolWindow.contentManager.addContent(content)
+//        val myToolWindow = MyToolWindow(toolWindow)
+//        val content = ContentFactory.getInstance().createContent(myToolWindow.getContent(), null, false)
+        val contentManager = toolWindow.contentManager
+
+        with(RandomNumber()) {
+//            initPlugin(adbController)
+            contentManager.addContent(contentManager.factory.createContent(this, null, false))
+        }
+
+//        toolWindow.contentManager.addContent(content)
     }
 
     override fun shouldBeAvailable(project: Project) = true
 
     class MyToolWindow(toolWindow: ToolWindow) {
 
-        private val service = toolWindow.project.service<MyProjectService>()
+        private val service: MyProjectService = toolWindow.project.service()
 
         fun getContent() = JBPanel<JBPanel<*>>().apply {
             val label = JBLabel(MyBundle.message("randomLabel", "?"))

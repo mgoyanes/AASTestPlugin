@@ -37,13 +37,15 @@ dependencies {
     intellijPlatform {
 //         Plugin Dependencies. Uses `platformBundledPlugins` property from the gradle.properties file for bundled IntelliJ Platform plugins.
 //        bundledPlugins(providers.gradleProperty("platformBundledPlugins").map { it.split(',') })
+        androidStudio("2024.2.2.3")
+        plugin("org.jetbrains.android:242.21829.142")
 
-        // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file for plugin from JetBrains Marketplace.
-        plugins(providers.gradleProperty("platformPlugins").map { it.split(',') })
-
-//        create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion"))
-        local(providers.gradleProperty("androidStudioPath"))
-
+//        // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file for plugin from JetBrains Marketplace.
+//        plugins(providers.gradleProperty("platformPlugins").map { it.split(',') })
+//
+////        create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion"))
+//        local(providers.gradleProperty("androidStudioPath"))
+//
         instrumentationTools()
         pluginVerifier()
         zipSigner()

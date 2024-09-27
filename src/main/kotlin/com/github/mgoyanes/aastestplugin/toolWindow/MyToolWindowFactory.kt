@@ -1,6 +1,7 @@
 package com.github.mgoyanes.aastestplugin.toolWindow
 
 import RandomNumber
+import RandomNumber.AdbController
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
@@ -11,6 +12,7 @@ import com.intellij.ui.components.JBPanel
 import com.intellij.ui.content.ContentFactory
 import com.github.mgoyanes.aastestplugin.MyBundle
 import com.github.mgoyanes.aastestplugin.services.MyProjectService
+import org.jetbrains.android.sdk.AndroidSdkUtils
 import javax.swing.JButton
 
 
@@ -23,10 +25,12 @@ class MyToolWindowFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
 //        val myToolWindow = MyToolWindow(toolWindow)
 //        val content = ContentFactory.getInstance().createContent(myToolWindow.getContent(), null, false)
+        val adbController = AdbController(AndroidSdkUtils.getDebugBridge(project))
         val contentManager = toolWindow.contentManager
 
+
         with(RandomNumber()) {
-//            initPlugin(adbController)
+            this.initPlugin(adbController)
             contentManager.addContent(contentManager.factory.createContent(this, null, false))
         }
 

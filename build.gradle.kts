@@ -36,15 +36,16 @@ dependencies {
     // IntelliJ Platform Gradle Plugin Dependencies Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html
     intellijPlatform {
 //         Plugin Dependencies. Uses `platformBundledPlugins` property from the gradle.properties file for bundled IntelliJ Platform plugins.
-//        bundledPlugins(providers.gradleProperty("platformBundledPlugins").map { it.split(',') })
-        androidStudio("2024.2.2.3")
-        plugin("org.jetbrains.android:242.21829.142")
+        bundledPlugins(providers.gradleProperty("platformBundledPlugins").map { it.split(',') })
+//        androidStudio("2024.2.2.3")
+//        plugin("org.jetbrains.android:242.21829.142")
+        plugin("org.jetbrains.android:243.16718.32")
 
 //        // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file for plugin from JetBrains Marketplace.
-//        plugins(providers.gradleProperty("platformPlugins").map { it.split(',') })
-//
+        plugins(providers.gradleProperty("platformPlugins").map { it.split(',') })
+
 ////        create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion"))
-//        local(providers.gradleProperty("androidStudioPath"))
+        local(providers.gradleProperty("androidStudioPath"))
 //
         instrumentationTools()
         pluginVerifier()
